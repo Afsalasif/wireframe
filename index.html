@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cybersecurity Website</title>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slide {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(0); }
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e8f1f8;
+            color: #333;
+            line-height: 1.6;
+        }
+        .section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            min-height: 100vh;
+            text-align: center;
+            padding: 2em;
+            color: #fff;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        .landing-page, .about-page, .products-page, .services-page, .blog-page, .research-page, .contact-page {
+            background: linear-gradient(135deg, #004aad, #0077d9);
+            color: #ffffff;
+        }
+        .section h1, .section h2 {
+            font-size: 2.5em;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .section p {
+            font-size: 1.2em;
+            margin: 1em 0;
+        }
+        .section button {
+            background-color: #005fb8;
+            color: #ffffff;
+            padding: 0.75em 2em;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+        }
+        .section button:hover {
+            background-color: #006fe0;
+            transform: scale(1.05);
+        }
+        nav {
+            background-color: #004aad;
+            display: flex;
+            justify-content: center;
+            padding: 1em;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        nav a {
+            color: #ffffff;
+            margin: 0 1em;
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        nav a:hover {
+            color: #cfe4f8;
+            transform: scale(1.1);
+        }
+        footer {
+            background-color: #004aad;
+            color: #ffffff;
+            text-align: center;
+            padding: 1.5em;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            font-size: 0.9em;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+        }
+        footer p {
+            margin: 0.5em 0;
+        }
+        footer a {
+            color: #cfe4f8;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .carousel {
+            position: relative;
+            width: 80%;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .carousel-item {
+            min-width: 100%;
+            box-sizing: border-box;
+            padding: 20px;
+            background: #ffffff;
+            color: #333;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .carousel-controls {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+        .carousel-btn {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 50%;
+            font-size: 1.5em;
+        }
+        .carousel-btn:hover {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 80%;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 0.75em;
+            margin: 0.5em 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1em;
+        }
+
+        .contact-form button {
+            margin-top: 1em;
+            background-color: #005fb8;
+            color: #ffffff;
+            padding: 0.75em 2em;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+        }
+
+        .contact-form button:hover {
+            background-color: #006fe0;
+            transform: scale(1.05);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5em;
+            margin-top: 1.5em;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .product-item {
+            background: #ffffff;
+            color: #333;
+            padding: 1em;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .product-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5em;
+            margin-top: 1.5em;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .service-item {
+            background: #ffffff;
+            color: #333;
+            padding: 1em;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .service-item:hover {
+            transform: translateY(-10px);
+        }
+
+        @media (max-width: 768px) {
+            .section h1, .section h2 {
+                font-size: 2em;
+            }
+            nav a {
+                font-size: 0.9em;
+                margin: 0 0.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="landing-page section">
+        <h1>Welcome to Cybersecurity</h1>
+        <p>Securing your digital future with cutting-edge solutions.</p>
+        <button onclick="scrollToSection('about')">Explore More</button>
+    </div>
+    <nav>
+        <a href="#about">About Us</a>
+        <a href="#products">Products</a>
+        <a href="#services">Services</a>
+        <a href="#blog">Blog</a>
+        <a href="#research">Research</a>
+        <a href="#contact">Contact Us</a>
+    </nav>
+    <div class="about-page section" id="about">
+        <h2>About Us</h2>
+        <p>Learn more about our mission and values.</p>
+    </div>
+    <div class="products-page section" id="products">
+        <h2>Products</h2>
+        <div class="products-grid">
+            <div class="product-item">
+                <h3>Vulnerability Management</h3>
+                <p>Stay ahead by identifying and addressing system vulnerabilities.</p>
+            </div>
+            <div class="product-item">
+                <h3>Threat Management</h3>
+                <p>Advanced solutions to monitor, detect, and mitigate threats.</p>
+            </div>
+            <div class="product-item">
+                <h3>Asset Intelligence</h3>
+                <p>Gain insights into your critical assets with comprehensive analytics.</p>
+            </div>
+            <div class="product-item">
+                <h3>Decoy and Deception</h3>
+                <p>Confuse and trap adversaries with state-of-the-art deception tactics.</p>
+            </div>
+        </div>
+    </div>
+    <div class="services-page section" id="services">
+        <h2>Services</h2>
+        <div class="services-grid">
+            <div class="service-item"><h3>Consulting</h3></div>
+            <div class="service-item"><h3>Risk Assessment and Gap Analysis</h3></div>
+            <div class="service-item"><h3>OT Penetration Testing</h3></div>
+            <div class="service-item"><h3>OT/ICS and IoT Security Training</h3></div>
+            <div class="service-item"><h3>OT Security Operations Center</h3></div>
+            <div class="service-item"><h3>Incident Detection and Response</h3></div>
+            <div class="service-item"><h3>OT/ICS Security Exercises</h3></div>
+            <div class="service-item"><h3>Compliance</h3></div>
+            <div class="service-item"><h3>OT and IoT Governance</h3></div>
+            <div class="service-item"><h3>OT and IoT Threat Hunting</h3></div>
+            <div class="service-item"><h3>OT Purple Teaming</h3></div>
+            <div class="service-item"><h3>OT Patch Management</h3></div>
+            <div class="service-item"><h3>Threat Intelligence</h3></div>
+            <div class="service-item"><h3>OT DMZ</h3></div>
+            <div class="service-item"><h3>Assessment Audit</h3></div>
+        </div>
+    </div>
+    <div class="blog-page section" id="blog">
+        <h2>Blog</h2>
+        <div class="carousel">
+            <div class="carousel-track">
+                <div class="carousel-item">
+                    <h3>Article 1</h3>
+                    <p>Discover the latest trends in cybersecurity for 2024.</p>
+                </div>
+                <div class="carousel-item">
+                    <h3>Article 2</h3>
+                    <p>Understanding vulnerability management in the modern era.</p>
+                </div>
+                <div class="carousel-item">
+                    <h3>Article 3</h3>
+                    <p>How AI is shaping the future of threat intelligence.</p>
+                </div>
+            </div>
+            <div class="carousel-controls">
+                <button class="carousel-btn prev">&#10094;</button>
+                <button class="carousel-btn next">&#10095;</button>
+            </div>
+        </div>
+    </div>
+    <div class="research-page section" id="research">
+        <h2>Research</h2>
+        <p>Explore our innovative research and findings.</p>
+    </div>
+    <div class="contact-page section" id="contact">
+        <h2>Contact Us</h2>
+        <p>Get in touch with us for more information or assistance.</p>
+        <form class="contact-form">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <input type="text" placeholder="Subject" required>
+            <textarea placeholder="Your Message" rows="5" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </div>
+    <footer>
+        <p>&copy; 2024 Cybersecurity Inc. All rights reserved.</p>
+        <p>Designed with ❤️ by Cybersecurity Inc. | <a href="#">Privacy Policy</a></p>
+    </footer>
+
+    <script>
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        const track = document.querySelector('.carousel-track');
+        const items = Array.from(track.children);
+        const nextButton = document.querySelector('.next');
+        const prevButton = document.querySelector('.prev');
+
+        let currentIndex = 0;
+
+        function updateCarousel() {
+            const itemWidth = items[0].getBoundingClientRect().width;
+            track.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
+        }
+
+        nextButton.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % items.length;
+            updateCarousel();
+        });
+
+        prevButton.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + items.length) % items.length;
+            updateCarousel();
+        });
+
+        window.addEventListener('resize', updateCarousel);
+    </script>
+</body>
+</html>
